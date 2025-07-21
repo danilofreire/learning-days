@@ -1,8 +1,6 @@
 ---
 title: "Teoría en Diseño Experimental"
 subtitle: "¿Pensaste que ibas a escapar de la teoría, verdad?"
-date: "2024-08-24"
-date-format: "DD-MM-YYYY"
 author:
   - name: Rosario Aguilar
     email: rosario.aguilar@newcastle.ac.uk
@@ -13,7 +11,7 @@ author:
 format:
   clean-revealjs:
     self-contained: true
-    footer: "[Teoría](https://danilofreire.github.io/ldm/theory.html)"
+    footer: "[Teoría](https://danilofreire.github.io/learning-days/theory.html)"
 bibliography: references.bib
 transition: slide
 transition-speed: default
@@ -26,6 +24,9 @@ editor:
 ```{r}
 #| echo: false
 #| results: hide 
+# Set R mirror if you need to install packages
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+# Load necessary libraries 
 knitr::opts_chunk$set(echo = TRUE)
 # Function to check if a package is installed, and install it if not
 install_if_missing <- function(package) {
@@ -42,16 +43,11 @@ packages <- c("emo", "fontawesome", "knitr", "rmarkdown", "kableExtra")
 lapply(packages, install_if_missing)
 ```
 
-# Causalidad y experimentos `r emo::ji('woman_scientist')` `r emo::ji('test_tube')` {background-color="#2d4563"}
+# Causalidad y experimentos 👩🏻‍🔬🧪 {background-color="#2d4563"}
 
 ## ¿Por qué la teoría?
 
-:::{style="margin-top: 30px;"}
-:::
-
-::::{.columns}
-:::{.column width="50%"}
-:::{style="font-size: 24px;"}
+:::{style="margin-top: 30px; font-size: 32px;"}
 :::{.incremental}
 - Como investigadores, estamos interesados en preguntas de investigación sobre [cómo funciona el mundo]{.alert}.
 - Hay varios tipos de preguntas que podemos querer responder.
@@ -59,14 +55,6 @@ lapply(packages, install_if_missing)
   - **Preguntas causales**: Preguntas sobre _cómo_ X afecta a Y: por ejemplo, “_¿Proporcionar formación profesional a los migrantes mejora su integración económica en el país receptor?_”
 :::
 :::
-:::
-
-:::{.column width="50%"}
-:::{.fragment .fade-in}
-![](./images/profs.jpg)
-:::
-:::
-::::
 
 ## Teoría
 
@@ -81,11 +69,11 @@ lapply(packages, install_if_missing)
   - **Nuestro resultado** (lo vamos a llamar **Y**)
 
 - ¿La causa que teorizamos lleva a observar cambios en Y?
-  - **Nuestro tratamiento** (en el contexto de experimentos) (lo vamos a llamar $\mathcal{T}$)
+  - **Nuestro tratamiento** (en el contexto de experimentos) (lo vamos a llamar **T**)
 
 - [¿Cuál es la teoría del cambio?]{.alert}
 
-- En última instancia, estamos interesados en cómo [dos conceptos teóricos están relacionados]{.alert}, medidos por [variables observadas]{.alert} $\mathcal{T}$ (nuestro tratamiento) y Y (nuestros resultados)
+- En última instancia, estamos interesados en cómo [dos conceptos teóricos están relacionados]{.alert}, medidos por [variables observadas]{.alert} **T** (nuestro tratamiento) y **Y** (nuestros resultados)
 :::
 :::
 :::
@@ -107,7 +95,7 @@ lapply(packages, install_if_missing)
 - Nuestra teoría nos permite:
 
 - Derivar [implicaciones observables]{.alert} (hipótesis) que probamos en el mundo real.
-- [Separar dos experimentos completamente no relacionados]{.alert} con propiedades empíricas idénticas para Y y $\mathcal{T}$
+- [Separar dos experimentos completamente no relacionados]{.alert} con propiedades empíricas idénticas para **Y** y **T**.
     - Por ejemplo, podríamos tener dos experimentos de tamaño idéntico con la misma asignación de tratamiento, los mismos resultados observados, [pero con teorías subyacentes significativamente diferentes]{.alert}.
 :::
 :::
@@ -159,7 +147,7 @@ lapply(packages, install_if_missing)
 
 :::{.column width="50%"}
 :::{.fragment .fade-in}
-![](./images/measurement_error_meme.png)
+![](./images/measurement_error_meme.jpg)
 :::
 :::
 ::::
@@ -170,9 +158,9 @@ lapply(packages, install_if_missing)
 :::
 
 :::{.incremental}
-- ¿Cuál es el resultado de interés (Y)?
+- ¿Cuál es el resultado de interés (**Y**)?
 
-- ¿Cuál es la causa de interés ($\mathcal{T}$)?
+- ¿Cuál es la causa de interés (**T**)?
 
 - ¿Cuál puede ser una teoría que conduzca a este diseño experimental?
 
@@ -186,13 +174,13 @@ lapply(packages, install_if_missing)
 
 :::{style="font-size: 28px;"}
 :::{.incremental}
-- [¿Podemos manipular directamente $\mathcal{T}$?]{.alert} (concepto de tratamiento subyacente de interés)
+- [¿Podemos manipular directamente **T**?]{.alert} (concepto de tratamiento subyacente de interés)
 
-  - Consideraciones éticas, logísticas y de otro tipo pueden limitar nuestra capacidad de manipular todos los indicadores de $\mathcal{T}$.
+  - Consideraciones éticas, logísticas y de otro tipo pueden limitar nuestra capacidad de manipular todos los indicadores de **T**.
   - En el mejor de los casos, podemos cambiar [algunos de sus indicadores]{.alert}.
   - Diseñamos un tratamiento, **T**, para hacerlo.
-  
-- [¿Cómo se relaciona **T** con $\mathcal{T}$?]{.alert}
+
+- [¿Cómo se relaciona **T** con **T**?]{.alert}
 
   - Pero **T** puede estar manipulando otras cosas (tratamientos combinados).
 
@@ -264,8 +252,10 @@ lapply(packages, install_if_missing)
 :::
 
 :::{.column width="50%"}
+:::{style="text-align: center; margin-top: -30px;"}
 :::{.fragment .fade-in}
 ![](./images/potter.jpg)
+:::
 :::
 :::
 ::::

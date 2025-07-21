@@ -1,8 +1,6 @@
 ---
 title: "Inferencia Causal"
 subtitle: "Correlación no implica causalidad... ¿o sí?"
-date: "20-07-2025"
-date-format: "DD-MM-YYYY"
 author:
   - name: Danilo Freire
     email: danilo.freire@emory.edu
