@@ -221,7 +221,7 @@ lapply(packages, install_if_missing)
 - El **efecto causal** del tratamiento (relativo al control) es:
 $\tau_i = Y_i (1) - Y_i(0)$
 
-- Tenga en cuenta que [hemos pasado a usar $T$ para indicar nuestro tratamiento]{.alert} (del cuál queremos saber el efecto). $X$ se utilizará para las variables explicatiorias. 
+- Tenga en cuenta que [hemos pasado a usar $T$ para indicar nuestro tratamiento]{.alert} (cuyo efecto queremos saber). $X$ se utilizará para las variables explicatorias. 
 :::
 
 ## Características clave de esta definición de efecto causal
