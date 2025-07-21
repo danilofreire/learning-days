@@ -385,7 +385,7 @@ Para hacer afirmaciones causales con un experimento (o para juzgar si creemos en
 
  - Supuesto de estabilidad del valor bajo tratamiento para cada unidad ([SEVTU]{.alert}).
 
- - [Excluibilidad]{.alert}, que significa que los valores potenciales de un sujeto responden solo al tratamiento definido y no a otros factores externos que pueden estar correlacionados con el tratamiento.
+ - [Excluibilidad]{.alert}, que significa que la asignación a un grupo de tratamiento afecta los resultados de un sujeto únicamente a través de la recepción del tratamiento en sí.
 :::
 
 ## Supuesto clave: SEVTU, parte 1
