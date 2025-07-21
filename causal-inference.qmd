@@ -1,19 +1,16 @@
 ---
 title: "Inferencia Causal"
 subtitle: "Correlación no implica causalidad... ¿o sí?"
-date: "2024-08-24"
+date: "20-07-2025"
 date-format: "DD-MM-YYYY"
 author:
-  - name: Julia Seither
-    email: julia.seither@urosario.edu.co
-    affiliations: Universidad Del Rosario
   - name: Danilo Freire
     email: danilo.freire@emory.edu
     affiliations: Emory University
 format:
   clean-revealjs:
     self-contained: true
-    footer: "[Inferencia Causal](https://danilofreire.github.io/ldm/causal-inference.html)"
+    footer: "[Inferencia Causal](https://danilofreire.github.io/learning-days/causal-inference.html)"
 bibliography: references.bib
 transition: slide
 transition-speed: default
@@ -26,6 +23,9 @@ editor:
 ```{r}
 #| echo: false
 #| results: hide 
+# Set a mirror if you need to install packages
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+# Load knitr and set options
 knitr::opts_chunk$set(echo = TRUE)
 # Function to check if a package is installed, and install it if not
 install_if_missing <- function(package) {
@@ -42,12 +42,13 @@ packages <- c("emo", "fontawesome", "knitr", "rmarkdown", "kableExtra")
 lapply(packages, install_if_missing)
 ```
 
-# ¿Por qué importa la inferencia causal? `r emo::ji('thinking_face')` `r emo::ji('detective')` {background-color="#2d4563"}
+# ¿Por qué importa la inferencia causal? 🤔🕵️‍♂️ {background-color="#2d4563"}
 
-## ¿Por qué a los científicos sociales y los legisladores les deberían importar la causalidad?
+## ¿Por qué a los científicos sociales y los formuladores de políticas les deberían importar la causalidad?
 
-:::::{.columns}
-::::{.column width="50%"}
+:::{style="font-size: 26px;"}
+:::{.columns}
+:::{.column width="50%"}
 :::{.incremental}
 - [Empezamos con ustedes: ¿por qué motivos?]{.alert}
 
@@ -59,9 +60,9 @@ lapply(packages, install_if_missing)
   - [Cerrar la brecha entre intención e impacto real de nuestras
     acciones]{.alert}
 :::
-::::
+:::
 
-::::{.column width="50%"}
+:::{.column width="50%"}
 :::{.fragment .fade-in}
 ![](./images/clinical_trials.png)
 :::
@@ -69,8 +70,9 @@ lapply(packages, install_if_missing)
 :::{.fragment .fade-in}
 ![](./images/maybe.png)
 :::
-::::
-:::::
+:::
+:::
+:::
 
 ## Enfoque Contrafactual de la Inferencia Causal
 ### Cambios recientes en la investigación en ciencias sociales
@@ -106,14 +108,18 @@ lapply(packages, install_if_missing)
 ## Premios Nobel en Economía
 ### Banerjee, Duflo y Kremer
 
-![](./images/nobel01.png)
+:::{style="text-align: center;"}
+![](./images/nobel01.png){width="60%"}
+:::
 
 ## Premios Nobel en Economía
 ### Card, Angrist y Imbens
 
-![](./images/nobel02.png)
+:::{style="text-align: center;"}
+![](./images/nobel02.png){width="60%"}
+:::
 
-# ¿Qué es la causalidad? `r emo::ji('woman_shrugging')` `r emo::ji('man_shrugging')` {background-color="#2d4563"}
+# ¿Qué es la causalidad? 🤷🏻‍♀️🤷🏻‍♂️ {background-color="#2d4563"}
 
 ## "X causó Y" es una afirmación sobre lo que no sucedió
 
@@ -159,20 +165,24 @@ lapply(packages, install_if_missing)
 4. [No es necesario conocer el mecanismo]{.alert} para establecer que X causa Y. El mecanismo puede ser complejo y puede involucrar probabilidad: X causa Y a veces debido a A y a veces debido a B.
 
 5. La causalidad contrafactual no requiere "una secuencia espacio-temporal continua de intermediarios causales"
-    - Ejemplo: la persona A planifica el evento Y. La acción de la persona B detendría a Y (digamos, un golpe aleatorio de un extraño). La persona C no sabe sobre la persona A o la acción Y, pero detiene a B (quizá porque piensa que B se va a tropezar). Entonces, la Persona A realiza la acción Y y la Persona C causa la acción Y (sin la acción de la Persona C, Y no habría ocurrido)[@holland:1986].
 
-6. Correlación no es igual a causalidad.
+6. Correlación _casi nunca_ es igual a causalidad.
 :::
 
 ## Ejercicio: equinácea
 
-:::{style="margin-top: 30px;"}
-:::
+:::{style="margin-top: 30px; font-size: 27px;"}
 
 :::{.incremental}
 - Un amigo suyo dice que tomar equinácea (un remedio tradicional) reduce la duración de los resfriados.
 
 - Si adoptamos un enfoque contrafactual, ¿qué nos dice implícitamente esta afirmación sobre el contrafactual? ¿Qué otros contrafactuales podrían ser posibles y por qué?
+
+- El contrafactual implícito es: ["Si yo no hubiera tomado equinácea, mi resfriado habría durado más tiempo".]{.alert}
+- ¡Pero este no es el único contrafactual posible!
+  - Por ejemplo, podría ser: ["Si yo no hubiera tomado equinácea, mi resfriado habría durado lo mismo".]{.alert} ("variabilidad natural", "placebo" o "nulo")
+  - ["Si yo no hubiera tomado equinácea, mi resfriado habría durado menos tiempo".]{.alert} ("efecto negativo de la equinácea")
+:::
 :::
 
 # Resultados potenciales {background-color="#2d4563"}
@@ -183,7 +193,7 @@ lapply(packages, install_if_missing)
 :::
 
 ::::{.columns}
-:::{.column width="50%"}
+:::{.column width="60%"}
 :::{style="font-size: 28px;"}
 :::{.incremental}
 - Para cada unidad asumimos que hay dos **valores posteriores al tratamiento**: $Y_i(1)$ y $Y_i(0)$.
@@ -195,9 +205,11 @@ lapply(packages, install_if_missing)
 :::
 :::
 
-:::{.column width="50%"}
+:::{.column width="40%"}
 :::{.fragment .fade-in}
-![](./images/forks.jpg){width="60%"}
+:::{style="text-align: center; margin-top: -30px;"}
+![](./images/forks.jpg){width="80%"}
+:::
 :::
 :::
 ::::
@@ -362,7 +374,9 @@ Cada hogar $i$ tiene [$Y_i(0)$]{.fragment .highlight-blue} y [$Y_i(1)$]{.fragmen
 
 ## Asignación aleatoria a la condición roja (1) o azul (0)
 
-![](./images/randomassignment.png)
+:::{style="text-align: center;"}
+![](./images/randomassignment.png){width="60%"}
+:::
 
 ## Tres supuestos clave
 
@@ -395,7 +409,7 @@ Para hacer afirmaciones causales con un experimento (o para juzgar si creemos en
 
    - Digamos que el tratamiento es vacunarse, pero hay dos tipos de vacunas y tienen diferentes ingredientes.
 
-   - Un ejemplo de una violación al supuesto es que el enfermarme luego de haberme puesto la vacuna ($Y_i(1)$) dependa de la vacuna que recibí. ¡Habría dos $Y_i(1)$ diferentes!
+   - Un ejemplo de una violación a este supuesto es que el que me enferme luego de haberme puesto la vacuna ($Y_i(1)$) dependa del tipo de vacuna que recibí. ¡Habría dos $Y_i(1)$ diferentes!
 
 ## Supuesto clave: Excludibilidad
 
@@ -491,12 +505,3 @@ características claves de dos diseños: uno observacional y el otro aleatorio.
 [Informe 40 de políticas públicas  de EGAP: Asistencia para el desarollo y la capacidad de acción colectiva](https://egap.org/resource/brief-40-development-assistance-and-collective-action-capacity/)
 
 [Informe 50 de políticas públicas de EGAP: ¿Funciona la rendición de cuentas que parte desde las bases sociales?](https://egap.org/resource/does-bottom-up-accountability-work-evidence-from-uganda/)
-
-
-
-
-
-
-
-
-
