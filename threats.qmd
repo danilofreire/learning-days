@@ -1,8 +1,6 @@
 ---
 title: "Amenazas a la validez interna de los experimentos aleatorizados"
 subtitle: "Cómo (intentar) evitar que tu experimento se convierta en un desastre"
-date: "2024-08-29"
-date-format: "DD-MM-YYYY"
 author:
   - name: Danilo Freire
     email: danilo.freire@emory.edu
@@ -10,7 +8,7 @@ author:
 format:
   clean-revealjs:
     self-contained: true
-    footer: "[Amenazas](https://danilofreire.github.io/ldm/threats.html)"
+    footer: "[Amenazas](https://danilofreire.github.io/learning-days/threats.html)"
 bibliography: references.bib
 transition: slide
 transition-speed: default
@@ -20,7 +18,7 @@ editor:
   render-on-save: true
 ---
 
-# Revisión de los supuestos principales `r emo::ji('man_teacher')` `r emo::ji('books')` {background-color="#2d4563"}
+# Revisión de los supuestos principales 👨🏻‍🏫📚 {background-color="#2d4563"}
 
 ## Puntos clave de esta presentación
 
@@ -55,7 +53,7 @@ editor:
 :::
 ::::
 
-# Deserción `r emo::ji('running')` {background-color="#2d4563"}
+# Deserción 🏃🏻‍♂️ {background-color="#2d4563"}
 
 ## Deserción (variables de resultado con datos faltantes)
 ### Attrition
@@ -77,7 +75,7 @@ editor:
 :::
 :::
 
-# ¿Qué podemos hacer? `r emo::ji('thinking_face')` {background-color="#2d4563"}
+# ¿Qué podemos hacer? 🤔🧐 {background-color="#2d4563"}
 
 ## ¿Qué podemos hacer?
 ### Un checklist
@@ -159,7 +157,7 @@ editor:
 :::
 ::::
 
-# Incumplimiento `r emo::ji('cross_mark_button')` `r emo::ji('raised_hand')` {background-color="#2d4563"}
+# Incumplimiento 🚫✋ {background-color="#2d4563"}
 
 ## Incumplimiento
 ### Non-compliance
@@ -199,7 +197,7 @@ editor:
 :::
 :::
 
-# Derrame {background-color="#2d4563"}
+# Derrame 🫟 {background-color="#2d4563"}
 
 ## Derrame e interferencia entre unidades
 ### Spillover and interference between units
@@ -242,9 +240,9 @@ editor:
 :::
 :::    
 
-# Efecto Hawthorne `r emo::ji('eyes')` `r emo::ji('camera_with_flash')` {background-color="#2d4563"}
+# Efecto Hawthorne 👀📸 {background-color="#2d4563"}
 
-## Efecto Hawthorne
+## Efecto Hawthorne 😇
 
 :::{style="margin-top: 30px;"}
 :::
@@ -278,7 +276,7 @@ editor:
 
 - No debemos hacer mediciones adicionales para el grupo de tratamiento.
 
-# No excluibilidad {background-color="#2d4563"}
+# No excluibilidad 🙅‍♀️ {background-color="#2d4563"}
 
 ## Diferencias entre los grupos de tratamiento y control más allá del tratamiento
 

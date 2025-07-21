@@ -147,7 +147,7 @@ lapply(packages, install_if_missing)
 
 :::{.column width="50%"}
 :::{.fragment .fade-in}
-![](./images/measurement_error_meme.jpg)
+![](./images/measurement-error.jpg)
 :::
 :::
 ::::
