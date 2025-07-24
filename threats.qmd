@@ -18,8 +18,6 @@ editor:
   render-on-save: true
 ---
 
-# Revisión de los supuestos principales 👨🏻‍🏫📚 {background-color="#2d4563"}
-
 ## Puntos clave de esta presentación
 
 :::{style="margin-top: 30px;"}
@@ -52,7 +50,7 @@ editor:
 ## Deserción (variables de resultado con datos faltantes)
 ### Otro problema de datos faltantes
 
-:::{style="margin-top: 30px; font-size: 24px;"}
+:::{style="margin-top: 30px; font-size: 23px;"}
 :::{.columns}
 :::{.column width=50%}
 - [Deserción]{.alert}: Pérdida de participantes antes de la finalización del estudio
@@ -508,13 +506,11 @@ Fuente: [Collazos et al. (2021)](https://link.springer.com/article/10.1007/s1129
 
 - Para investigar los efectos de derrame:
 
-:::{.incremental}
 - Podemos [recolectar datos]{.alert} de la variable de resultado para las unidades que nunca fueron elegibles para la asignación aleatoria al tratamiento, pero que estaban cerca de unidades que sí eran elegibles para el tratamiento y que pudieron verse afectadas por efectos de derrame.
 
 - Podemos utilizar un [diseño de asignación aleatoria en dos etapas]{.alert}.
 
 - Podemos asignar grupos de unidades (p. Ej., Distritos) [a diferentes niveles de intensidad de tratamiento]{.alert} (p. Ej., Usar una proporción diferente de aldeas en los distritos asignados al tratamiento).
-:::
 :::    
 
 ## Un ejemplo
@@ -550,7 +546,7 @@ Fuente: [Collazos et al. (2021)](https://link.springer.com/article/10.1007/s1129
 ## Un ejemplo
 ### Campaña para aumentar la participación electoral
 
-:::{style="margin-top: 20px; font-size: 26px;"}
+:::{style="margin-top: 20px; font-size: 23px;"}
 - [Los resultados potenciales dependen tanto del estado de tratamiento propio como del compañero de casa]{.alert}
 - El sistema de notación revisado tiene en cuenta las [influencias de tratamiento dual]{.alert} ($Y_{ab}$ donde):
   - `a` = [estado de tratamiento del compañero de casa (0=control, 1=tratado)]{.alert}
@@ -589,7 +585,7 @@ Fuente: [Collazos et al. (2021)](https://link.springer.com/article/10.1007/s1129
 ## Desafíos de implementación
 ### Consideraciones prácticas
 
-::: {style="margin-top: 20px; font-size: 24px;"}
+::: {style="margin-top: 20px; font-size: 23px;"}
 ::: {.columns}
 ::: {.column width="50%"}
 - Obstáculos comunes de implementación:
@@ -656,7 +652,7 @@ Fuente: [Collazos et al. (2021)](https://link.springer.com/article/10.1007/s1129
 
 - No debemos hacer mediciones adicionales para el grupo de tratamiento.
 
-# No excluibilidad 🙅‍♀️ {background-color="#2d4563"}
+# No excluibilidad {background-color="#2d4563"}
 
 ## Diferencias entre los grupos de tratamiento y control más allá del tratamiento
 
