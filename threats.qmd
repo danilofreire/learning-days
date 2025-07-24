@@ -37,42 +37,166 @@ editor:
  - Efecto Hawthorne
 
  - Tratamiento diferencial de los distintos brazos de tratamiento
-
-- Repaso de los supuestos principales
-
-  1. Exclusión 
-
-  2. No interferencia
-
-  3. Asignación aleatoria de sujetos al tratamiento
 :::
 :::
 
 :::{.column width="50%"}
+:::{style="text-align: center; margin-top: -40px;"}
 ![](./images/though-so.jpg)
+:::
 :::
 ::::
 
 # Deserción 🏃🏻‍♂️ {background-color="#2d4563"}
 
 ## Deserción (variables de resultado con datos faltantes)
-### Attrition
+### Otro problema de datos faltantes
 
-:::{style="margin-top: 30px;"}
+:::{style="margin-top: 30px; font-size: 24px;"}
+:::{.columns}
+:::{.column width=50%}
+- [Deserción]{.alert}: Pérdida de participantes antes de la finalización del estudio
+- Dos tipos principales:
+  - [Deserción aleatoria]{.alert}: La ausencia de datos no está relacionada con el tratamiento/resultado
+  - [Deserción no aleatoria/sistemática]{.alert}: La ausencia de datos se correlaciona con otras variables
+- Impactos:
+  - Reducción del [poder estadístico]{.alert} 📉
+  - Potencial [sesgo de selección]{.alert} que amenaza la validez
+  - [Generalización]{.alert} comprometida 🌐
 :::
 
-:::{style="font-size: 25px;"}
-:::{.incremental}
-- Algunas unidades pueden tener [datos faltantes para las variables de resultado]{.alert} (= las unidades desertan) cuando:
-  - algunos encuestados no pueden ser encontrados o se niegan a participar en la recolección de datos finales.
-  - se pierden algunos registros.
-
-- Esto es problemático cuando los datos faltantes han sido ocasionados por el tratamiento.
-
-  - Por ejemplo, el tratamiento puede haber provocado la migración de unidades y no hay forma de acceder a ellas.
-
-- Si analizamos los datos descartando unidades con datos faltantes para la variable de resultado, [entonces ya no estaríamos comparando grupos de tratamiento y control similares]{.alert}.
+:::{.column width=50%}
+:::{style="text-align: center; margin-top: -40px;"}
+![](images/drake.png){width=100%}
 :::
+:::
+:::
+:::
+
+## Deserción en experimentos
+### Datos de resultado faltantes
+
+:::{style="margin-top: 30px; font-size: 24px;"}
+:::{.columns}
+:::{.column width=50%}
+- Cuando la [deserción]{.alert} se correlaciona con el tratamiento, [puede sesgar las estimaciones]{.alert}
+- Varios factores pueden conducir a la [deserción]{.alert}:
+  - [Incumplimiento]{.alert}: La intervención es demasiado engorrosa, injusta o ineficaz
+  - [Fatiga de encuesta]{.alert}: Los participantes pierden interés con el tiempo
+  - [Eventos imprevistos]{.alert}: Problemas de salud, cambios de trabajo, etc.
+  - [Errores en la recolección de datos]{.alert}: Intencionales o no
+:::
+
+:::{.column width=50%}
+- La [deserción]{.alert} [obliga a los académicos a hacer suposiciones]{.alert} sobre los datos faltantes
+- La principal es que [la ausencia de datos es ignorable]{.alert}, es decir, no está relacionada con el resultado
+- Otro enfoque es suponer que [la ausencia de datos está relacionada con variables observadas]{.alert}
+- En este caso, se pueden utilizar [algunos métodos estadísticos]{.alert} para modelar el mecanismo de ausencia de datos
+- Finalmente, podemos [intentar recolectar más datos]{.alert} para reducir la [deserción]{.alert}, pero esto no siempre es factible
+:::
+:::
+:::
+
+# Casos especiales de deserción {background-color="#2d4563"}
+
+## Casos especiales de deserción
+### Datos faltantes independientes de los resultados potenciales
+
+:::{style="margin-top: 30px; font-size: 22px;"}
+:::{.columns}
+:::{.column width=50%}
+- ¡La [deserción aleatoria]{.alert} es el mejor de los casos!
+- Esta afirmación generalmente [no se verifica directamente]{.alert}, sino que se asume
+- Formalmente, 
+
+$$Y_i(z) \perp R_i(z)$$
+
+- En algunos casos, esto puede ser cierto, como un mal funcionamiento de la computadora que causa la pérdida de datos de algunos participantes
+- ¡De hecho, podemos probar eso!
+  - Simplemente haga una regresión de $r_i$ sobre las covariables y la asignación del tratamiento y no debería encontrar una relación significativa
+:::
+
+:::{.column width=50%}
+- Si la [deserción]{.alert} es aleatoria, podemos [ignorarla]{.alert} y continuar con nuestro análisis
+- Sin embargo, todavía tiene problemas:
+  - [Poder reducido]{.alert} debido a un tamaño de muestra más pequeño
+  - Problemas de [generalización]{.alert}
+- Pero al menos podemos [estimar el ATE]{.alert} sin sesgo 😅
+- [¿Cuáles son otros ejemplos de deserción aleatoria?]{.alert} ¿Se le ocurre alguno?
+:::
+:::
+:::
+
+## Casos especiales de deserción
+### Datos faltantes relacionados con variables observadas
+
+:::{style="margin-top: 30px; font-size: 24px;"}
+:::{.columns}
+:::{.column width=50%}
+- Dado que la [deserción aleatoria]{.alert} es rara, a menudo tenemos que lidiar con [deserción no aleatoria]{.alert}
+- Un tipo especial es la [ausencia independiente de los resultados potenciales dado X]{.alert}, o $MIPO | X$ (missing independent of potential outcomes given X)
+
+$$Y_i(z) \perp R_i(z) | X_i$$
+
+- Puede incluir más covariables en $X_i$ si cree que están relacionadas con la [deserción]{.alert}
+- Imaginamos que hay una intervención que mejora los resultados de los estudiantes, pero algunos estudiantes no asisten a la escuela el día de la evaluación
+:::
+
+:::{.column width=50%}
+- Supongamos que estudiantes con poca asistencia tienen más probabilidades de ausentarse el día de la evaluación y más probabilidades de beneficiarse de una intervención
+- $MIPO|X$ significa que si uno [divide la muestra experimental por asistencia previa, la ausencia es aleatoria dentro de cada subgrupo]{.alert}
+- Entre los estudiantes cuyo historial de asistencia es deficiente, no existe una relación entre la ausencia a la escuela el día de la evaluación y los resultados potenciales de los sujetos
+- Lo mismo ocurre con los estudiantes con un buen historial de asistencia
+:::
+:::
+:::
+
+## Ponderación por probabilidad inversa
+### Una forma de manejar los datos faltantes relacionados con variables observadas
+
+:::{style="margin-top: 30px; font-size: 22px;"}
+- Podemos compensar los datos faltantes [ponderando los datos observados]{.alert}
+- La idea es [sobreponderar las observaciones que son similares a las faltantes]{.alert}
+- Permítanme darles un ejemplo sencillo:
+  - Supongamos que tenemos 40 personas en nuestro experimento
+  - 30 son hombres y 10 son mujeres
+  - El promedio general sería $\frac{30}{40} \times$ promedio de los hombres + $\frac{10}{40} \times$ promedio de las mujeres
+- Ahora supongamos que 15 de los 30 hombres abandonan
+- "Controlando por género" (es decir, ponderando):
+  - Los 15 hombres restantes producen una estimación insesgada del promedio entre los 30 hombres
+  - ¡Así que podemos [contarlos dos veces]{.alert}!
+  - Esta es la esencia de la [ponderación por probabilidad inversa]{.alert} (IPW - Inverse Probability Weighting)
+:::
+
+## Ponderación por probabilidad inversa
+### La fórmula
+
+:::{style="margin-top: 30px; font-size: 22px;"}
+- IPW estima el ATE cuando se cumple $MIPO|X$
+- Para estimar el ATE, necesitamos $E[Y_i(1)]$ y $E[Y_i(0)]$ (¡como ya saben!)
+- Cuando se cumple $MIPO|X$, $E[Y_i(1)]$ es un promedio ponderado:
+
+$$E[Y_i(1)] = \frac{1}{N} \sum_{i=1}^{N} \frac{Y_i(1) r_i(1)}{\pi_i(z = 1, x)},$$
+
+  - $\pi_i(z = 1, x)$: proporción de sujetos no ausentes entre los tratados con perfil de covariable $x$
+  - Los resultados faltantes no tienen efecto en la suma
+  - Resultados informados ponderados por $1/\pi_i(z = 1, x)$
+  - Las ponderaciones reemplazan los valores faltantes con copias de los valores no faltantes
+- El esquema de ponderación se llama [ponderación por probabilidad inversa]{.alert} porque [las observaciones se ponderan por la probabilidad inversa de ser observadas]{.alert}
+:::
+
+## Desventajas de IPW
+### Cuando $MIPO|X$ es incorrecto
+
+:::{style="margin-top: 30px; font-size: 26px;"}
+- El [supuesto incorrecto de $MIPO|X$]{.alert} conduce a estimaciones engañosas
+- IPW asigna [las mayores ponderaciones a los subgrupos con alta deserción]{.alert}
+- La estimación sesgada de un subgrupo puede influir desproporcionadamente en el ATE general
+- El promedio de IPW puede estar [más sesgado que los datos no ponderados]{.alert}
+- La reponderación [aumenta la variabilidad del muestreo]{.alert}
+- En la práctica, los investigadores deben [hacer suposiciones sobre la deserción]{.alert}
+- Evaluar $MIPO|X$: [trabajo de detective y especulación]{.alert} 🕵️‍♂️
+- Más información sobre IPW en [este conjunto de diapositivas](https://raw.githack.com/danilofreire/qtm385/main/lectures/lecture-11/11-attrition.html)
 :::
 
 # ¿Qué podemos hacer? 🤔🧐 {background-color="#2d4563"}
@@ -86,7 +210,6 @@ editor:
 ::::{.columns}
 :::{.column width="50%"}
 :::{style="font-size: 25px;"}
-:::{.incremental}
 - Compruebe si las [tasas de deserción son similares]{.alert} en los grupos de tratamiento y control.
 
 - Compruebe si las covariables de los grupos de tratamiento y control tienen [padrones similares]{.alert}.
@@ -96,12 +219,64 @@ editor:
 - A veces, cuando faltan datos en la variable de resultados, [podemos acotar ("bound") nuestras estimaciones]{.alert} del efecto del tratamiento.
 :::
 :::
-:::
 
 :::{.column width="50%"}
 ![](./images/data-loss.jpeg)
 :::
 ::::
+
+## Análisis de cotas extremas
+### Extreme Bounds Analysis (EBA)
+
+:::{style="margin-top: 30px; font-size: 27px;"}
+-  Imagina los [resultados faltantes de aquellos que abandonaron]{.alert}
+-  No sabemos cuáles son esos resultados, pero podemos considerar [dos escenarios extremos]{.alert}:
+  - [Mejor escenario posible]{.alert}: Asumir que los [desertores en el grupo de tratamiento habrían tenido los mejores resultados posibles]{.alert}, y los [desertores en el grupo de control habrían tenido los peores resultados posibles]{.alert} (en relación con los datos observados) 
+  - [Peor escenario posible]{.alert}: Asumir que los [desertores en el grupo de tratamiento habrían tenido los peores resultados posibles]{.alert}, y los [desertores en el grupo de control habrían tenido los mejores resultados posibles]{.alert} 
+
+- Al calcular el ATE bajo estos supuestos extremos, obtenemos un rango (cota superior y cota inferior) que (con suerte 😅) contiene el ATE verdadero
+:::
+
+## Un ejemplo sencillo
+
+:::{style="margin-top: 30px; font-size: 27px;"}
+:::{.columns}
+:::{.column width=50%}
+- Supongamos que nuestro programa tiene los siguientes resultados si no hay deserción:
+  - Promedio para el grupo de tratamiento: $\frac{(7 + 10 + 6 + 6)}{4} = \frac{29}{4} = 7.25$
+  - Promedio para el grupo de control: $\frac{(3 + 7 + 5 + 6)}{4} = \frac{21}{4} = 5.25$
+  - ATE: $7.25 - 5.25 = 2$
+:::
+
+:::{.column width=50%}
+- Ahora, supongamos que solo observamos los siguientes resultados:
+  - Promedio para el grupo de tratamiento: $\frac{(7 + 10 + ? + ?)}{4} = ?$
+  - Promedio para el grupo de control: $\frac{(? + 7 + 5 + 6)}{4} = ?$
+
+- Asumamos que los resultados recopilados muestran que los valores posibles para los datos faltantes están entre 0 y 10
+- ¡Veamos cómo calcular las cotas para el ATE!
+:::
+:::
+:::
+
+## Un ejemplo sencillo
+
+:::{style="margin-top: 30px; font-size: 26px;"}
+- Para encontrar la [cota superior]{.alert} de la estimación del efecto del tratamiento, [sustituya 10 por los valores faltantes en el grupo de tratamiento y 0 por el valor faltante en el grupo de control]{.alert}
+
+- Cota superior: $\frac{(7 + 10 + 10 + 10)}{4} - \frac{(0 + 7 + 5 + 6)}{4} = \frac{37}{4} - \frac{18}{4} = 4.75$
+
+- Para encontrar la cota inferior de la estimación del efecto del tratamiento, [sustituya 0 por los valores faltantes en el grupo de tratamiento y 10 por el valor faltante en el grupo de control]{.alert}
+
+- Cota inferior: $\frac{(7 + 10 + 0 + 0)}{4} - \frac{(10 + 7 + 5 + 6)}{4} = \frac{17}{4} - \frac{28}{4} = -2.75$
+
+- Entonces, el [ATE está entre -2.75 y 4.75]{.alert}... ¡y de hecho lo es ([2]{.alert})! 🎉
+
+- Pero como puedes ver, [las cotas son bastante amplias]{.alert}... 
+
+- [Lee (2009)](https://academic.oup.com/restud/article/76/3/1071/1590707) sugirió que podemos [recortar las cotas]{.alert} para hacerlas más informativas (y más estrechas)
+- Más información sobre el análisis de cotas extremas en [este conjunto de diapositivas](https://raw.githack.com/danilofreire/qtm385/main/lectures/lecture-11/11-attrition.html)
+:::
 
 ## ¿Qué podemos hacer?
 
@@ -118,12 +293,10 @@ editor:
 ::::{.columns}
 :::{.column width="50%"}
 :::{style="font-size: 27px;"}
-:::{.incremental}
 - Personas que [no sepan a qué condición]{.alert} del tratamiento fueron asignadas.
 - Prometerle al grupo de control que [va a recibir el tratamiento]{.alert} na vez concluida la investigación.
 - [Planificar ex ante]{.alert} para poder contactar a los sujetos en para la recolección final de datos.
 - Contar con presupuesto para haver [seguimiento intensivo]{.alert} a una muestra aleatoria de los sujetos que desierten
-:::
 :::
 :::
 
@@ -142,13 +315,11 @@ editor:
 :::{style="font-size: 25px;"}
 - La ausencia de datos en [covariables de contexto]{.alert} (es decir, variables cuyos valores no cambian como resultado del tratamiento) para algunas observaciones [es menos problemática]{.alert}. 
 
-:::{.incremental}
 - Podemos aprender sobre el efecto causal de un experimento incluso sin esas covariables
   
 - Podemos usar la covariable de contexto según lo planeado [imputando los datos faltantes]{.alert}
   
 - También podemos condicionar nuestro análisis directamente a esos datos faltantes
-:::
 :::
 :::
 
@@ -160,47 +331,130 @@ editor:
 # Incumplimiento 🚫✋ {background-color="#2d4563"}
 
 ## Incumplimiento
-### Non-compliance
+### Incumplimiento
 
 :::{style="margin-top: 30px;"}
 :::
 
 :::{style="font-size: 27px;"}
-:::{.incremental}
 - En algunas ocasiones [las unidades que son asignadas al tratamiento terminan no recibiéndolo]{.alert}. Es decir, no cumplen la asignación.
   
 - Si todas las unidades asignadas al grupo de control no toman el tratamiento, pero sólo algunas unidades asignadas al tratamiento sí lo toman, estamos frente a un caso de incumplimiento unilateral.
       
 - El efecto de ser asignado al tratamiento no es el mismo que el de recibir el tratamiento.
   
-- El efecto de recibir el tratamiento es comunmente conocido como "efecto local promedio del tratamiento" ([Local Average Treatment Effect, LATE]{.alert}) o efecto promedio del tratamiento para el cumplidor ([Complier Average Causal Effect, CACE]{.alert}).  
+- El efecto de recibir el tratamiento es comunmente conocido como "efecto local promedio del tratamiento" ([LATE]{.alert}) o efecto promedio del tratamiento para el cumplidor ([CACE]{.alert}).  
   
 - La palabra “local” hace referencia a la idea de que el efecto solo aplica para las personas que toman el tratamiento cuando son asignadas a éste (el tipo de personas). 
 :::
+
+## Un ejemplo motivador
+### Campaña para aumentar la participación electoral
+
+:::{style="margin-top: 30px; font-size: 28px;"}
+- Imagina que estás interesado en estudiar el efecto de las campañas electorales en la participación de los votantes
+  - ¡Quizás si tocas las puertas de las personas y les hablas sobre la importancia de votar, serán más propensas a hacerlo!
+- Diseñas un experimento en el que asignas aleatoriamente a 1000 personas para que reciban la campaña (grupo de tratamiento) y a 1000 para que no la reciban (grupo de control)
+- Sin embargo... usualmente solo el 25% de las personas en el grupo de tratamiento reciben realmente la campaña
+  - El resto no está en casa, se niega a hablar, etc.
+- Así que tenemos 250 personas tratadas y 1000 en el grupo de control
+- [¿Qué harías?]{.alert} 🤔
 :::
 
-## LATE/CACE
+## Algunas opciones
 
-:::{style="margin-top: 40px;"}
+:::{style="margin-top: 40px; font-size: 20px;"}
+
+:::{.columns}
+:::{.column width="50%"}
+- La primera opción que tenemos es [simplemente comparar los dos grupos]{.alert} como si nada hubiera pasado
+- El problema con este enfoque es que podría haber un [sesgo de selección]{.alert} en el grupo de tratamiento
+- La segunda opción, relacionada con la primera, es [asumir que las diferencias entre los dos grupos son aleatorias]{.alert}
+- El problema con este enfoque es que [no podemos probar esa suposición]{.alert}
+- No podemos saber si las diferencias entre los dos grupos son aleatorias o no
+- [¡Lo más probable es que no lo sean]{.alert}!
+- La tercera opción es [mantener la asignación aleatoria]{.alert} y comparar los dos grupos como si todos hubieran seguido la asignación del tratamiento
 :::
 
-:::{style="font-size: 27px;"}
-- Es necesario que se cumplan dos supuestos para poder estimar el LATE/CACE a partir de un experimento aleatorio.
-
-:::{.incremental}
-  
-1. [Restricción de exclusión]{.alert}: la asignación del tratamiento solo afecta la variable de resultado a través de la recepción del tratamiento y no a través de ningún otro canal.
-2. [Supuesto de monotonicidad]{.alert}: no hay unidades desobedientes, es decir, unidades que toman el tratamiento solo cuando son asignadas a control pero no toman el tratamiento cuando son asignados a este ("defiers").
-3. [Independencia]{.alert}: la asignación al tratamiento es independiente de la respuesta potencial a la asignación al tratamiento.
-4. [SUTVA]{.alert}: no hay interferencia entre las unidades y no hay versiones diferentes del tratamiento.
-5. [Relevancia del instrumento]{.alert}: el instrumento utilizado para asignar el tratamiento es relevante para la asignación al tratamiento ($Z$ está asociado con $T$).
+:::{.column width="50%"}
+- En lugar de comparar a las personas que realmente recibieron la campaña con las que no la recibieron, [comparamos a las personas que fueron asignadas a recibir la campaña con las que no fueron asignadas a recibirla]{.alert}
+- La diferencia aquí es [semántica]{.alert}:
+  - [Podríamos recuperar el ATE verdadero]{.alert} si solo le hubiéramos dado a la gente [la opción]{.alert} de recibir o no la campaña
+- La cuarta opción es usar [variables instrumentales (VI)]{.alert} (o mínimos cuadrados en dos etapas - 2SLS)
+- El beneficio de las VI es que nos permite [recuperar el efecto real del programa]{.alert} en lugar de solo el efecto de que se ofrezca el programa
+- La desventaja es que [las VI no nos permiten recuperar el ATE verdadero]{.alert} en toda la población, solo [en la subpoblación de cumplidores]{.alert}
 :::
+:::
+:::
+
+# CACE y VI 🤓 {background-color="#2d4563"}
+
+## Efecto causal promedio del cumplidor (CACE)
+### El efecto del tratamiento en los cumplidores
+
+:::{style="margin-top: 30px; font-size: 18px;"}
+- Como no podemos estimar correctamente el ATE con incumplimiento, nos centramos en el [efecto causal promedio del cumplidor (CACE)]{.alert}
+- El CACE intenta responder a esta pregunta: "[Para aquellos individuos que realmente escucharon el mensaje, ¿cuál es el efecto del mensaje en su probabilidad de votar?]{.alert}"
+- Sea la asignación experimental del sujeto $i$, $z_i$.
+- Cuando $z_i = 1$, el sujeto es asignado al grupo de tratamiento, y cuando $z_i = 0$, el sujeto es asignado al grupo de control.
+- Sea $d_i(z)$ una representación de si el sujeto $i$ es realmente tratado, dada la asignación $z_i$.
+- Para abreviar, escribamos $d_i(z = 1)$ como $d_i(1)$ y $d_i(z = 0)$ como $d_i(0)$.
+- Para el incumplimiento unilateral, $d_i(0)$ es siempre 0 para todas las personas en los grupos de control, pero $d_i(1)$ puede ser 0 o 1.
+- Formalmente, el CACE se define como:
+
+$$
+CACE \equiv \frac{\sum_{i=1}^{N}(Y_i(1) - Y_i(0))d_i(1)}{\sum_{i=1}^{N}d_i(1)} = E[(Y_i(d = 1) - Y_i(d = 0)) | d_i(1) = 1]
+$$
+
+- En otras palabras, es [el efecto del tratamiento, pero solo proveniente de los cumplidores, dividido por el número de cumplidores]{.alert}
+- El CACE también se conoce como [Efectos Locales Promedio del Tratamiento]{.alert} (LATE). [Más en este link](https://raw.githack.com/danilofreire/qtm385/main/lectures/lecture-09/09-non-compliance1.html#/new-definitions-and-assumptions).
+
+:::
+
+## CACE y variables instrumentales
+### El efecto del tratamiento en los cumplidores
+
+:::{style="margin-top: 30px; font-size: 22px;"}
+:::{.columns}
+:::{.column width="50%"}
+- Lo bueno del CACE/LATE es que tenemos un estimador consistente para él
+- Equivalente a los [estimadores de mínimos cuadrados en dos etapas]{.alert}
+  - Regresar $D_i$ sobre $Z_i$ para obtener los valores ajustados $\hat{D_i}$
+  - Regresar $Y_i$ sobre $\hat{D_i}$
+- Pero recuerde los supuestos:
+  - La [no interferencia]{.alert} se violará, por ejemplo, si el sujeto $j$ es contactado y se lo cuenta a $i$
+  - La [excluibilidad]{.alert} también puede violarse si los controles son tratados por otra campaña de contacto
+  - La [primera etapa]{.alert} requiere que al menos una persona sea tratada
+:::
+
+:::{.column width="50%"}
+:::{style="text-align: center;"}
+![](images/iv.png){width="100%"}
+
+Fuente: [Blackwell (2021)](https://mattblackwell.github.io/gov2003-f21-site/files/06_iv.pdf)
+:::
+:::
+:::
+:::
+
+## Estimando las regresiones
+
+:::{style="margin-top: 30px; font-size: 26px;"}
+- Volvamos a nuestro ejemplo de campaña electoral
+- Tenemos las siguientes regresiones para estimar el CACE:
+  - Primera etapa: $TRATADO_i = \alpha_0 + \alpha_1 ASIGNADO + \epsilon_i$
+  - Segunda etapa: $VOTÓ_i = \beta_0 + \beta_1 TRATADO + u_i$
+
+- La primera etapa estima el efecto de la asignación del tratamiento sobre el estado del tratamiento
+- La segunda etapa estima el efecto del estado del tratamiento sobre el resultado
+- El coeficiente $\beta_1$ es el estimador de [mínimos cuadrados en dos etapas (MC2E)]{.alert} del CACE
+- Más información sobre el CACE y las variables instrumentales en [este link](https://raw.githack.com/danilofreire/qtm385/main/lectures/lecture-09/09-non-compliance1.html#/option-04-instrumental-variables-iv)
 :::
 
 # Derrame 🫟 {background-color="#2d4563"}
 
 ## Derrame e interferencia entre unidades
-### Spillover and interference between units
+### Derrame e interferencia entre unidades
 
 :::{style="margin-top: 30px;"}
 :::
@@ -221,6 +475,29 @@ editor:
 :::
 ::::
 
+## ¡No todos los derrames son malos!
+
+:::{style="margin-top: 20px; font-size: 23px;"}
+:::{.columns}
+:::{.column width="50%"}
+- Como hemos visto, muchos fenómenos sociales son [interdependientes]{.alert}
+- Pero algunos están explícitamente [diseñados para aprovechar los derrames]{.alert}
+  - [Contaminación]{.alert}: El efecto de vacunarse en la probabilidad de contraer una enfermedad depende de si otros están vacunados
+  - [Efectos de red]{.alert}: El valor de un producto o servicio aumenta a medida que más personas lo usan (redes sociales, telecomunicaciones)
+  - [Vigilancia en puntos calientes]{.alert}: El efecto de una mayor presencia policial en un área puede reducir el crimen en áreas cercanas
+  - [Disuasión]{.alert}: El efecto de un castigo más severo en un individuo puede disuadir a otros de cometer delitos
+:::
+
+:::{.column width="50%"}
+:::{style="text-align: center;"}
+![](images/collazos.png){width=90%}
+
+Fuente: [Collazos et al. (2021)](https://link.springer.com/article/10.1007/s11292-019-09390-1)
+:::
+:::
+:::
+:::
+
 ## Estudiar los efectos secundarios
 
 :::{style="margin-top: 40px;"}
@@ -239,6 +516,109 @@ editor:
 - Podemos asignar grupos de unidades (p. Ej., Distritos) [a diferentes niveles de intensidad de tratamiento]{.alert} (p. Ej., Usar una proporción diferente de aldeas en los distritos asignados al tratamiento).
 :::
 :::    
+
+## Un ejemplo
+### Campaña para aumentar la participación electoral
+
+:::{style="margin-top: 20px; font-size: 23px;"}
+:::{.columns}
+:::{.column width="50%"}
+- Imagina que estamos realizando un experimento para probar el efecto de una campaña para salir a votar en la participación electoral
+- Tenemos un [diseño multinivel]{.alert}:
+  - Los [hogares]{.alert} se asignan aleatoriamente a tratamiento o control
+  - Dentro de los hogares, los [individuos]{.alert} también se asignan aleatoriamente
+- Nos centramos en [hogares de dos votantes]{.alert} donde los residentes comparten dirección
+- Grupos de asignación aleatoria:
+  - [5,000 hogares: ambos votantes objetivo]{.alert}
+  - [5,000 hogares: ninguno objetivo]{.alert}
+  - [10,000 hogares: uno aleatoriamente objetivo]{.alert}
+:::
+
+:::{.column width="50%"}
+- Crea cuatro grupos de 10,000 personas:
+  - [Correo recibido por ambos]{.alert}
+  - [Ninguno recibe correo]{.alert}
+  - [Correo con compañero de casa no tratado]{.alert}
+  - [No tratado con compañero de casa tratado]{.alert}
+- Características del [*diseño multinivel*]{.alert}:
+  - [Aleatorización en dos etapas]{.alert} (hogar y luego individuo)
+  - Ampliable a [niveles adicionales como código postal]{.alert}
+:::
+:::
+:::
+
+## Un ejemplo
+### Campaña para aumentar la participación electoral
+
+:::{style="margin-top: 20px; font-size: 26px;"}
+- [Los resultados potenciales dependen tanto del estado de tratamiento propio como del compañero de casa]{.alert}
+- El sistema de notación revisado tiene en cuenta las [influencias de tratamiento dual]{.alert} ($Y_{ab}$ donde):
+  - `a` = [estado de tratamiento del compañero de casa (0=control, 1=tratado)]{.alert}
+  - `b` = [estado de tratamiento propio (0=control, 1=tratado)]{.alert}
+
+| Notación | Compañero de casa | Propio | Interpretación |
+|----------|-----------|-----|----------------|
+| $Y_{00}$ | Control   | Control | [Resultado base]{.alert} |
+| $Y_{01}$ | Control   | Tratado | [Efecto directo del tratamiento]{.alert} |
+| $Y_{10}$ | Tratado   | Control | [Efecto de derrame]{.alert} |
+| $Y_{11}$ | Tratado   | Tratado | [Efectos combinados]{.alert} |
+
+- Supuesto clave: [Contención estricta en el hogar]{.alert}
+  - Resultados solo afectados por [intervenciones dentro del hogar]{.alert}
+  - Sin interferencia de [asignaciones de tratamiento externas]{.alert}
+:::
+
+## Definiendo los efectos causales
+
+:::{style="margin-top: 20px; font-size: 26px;"}
+- De los [cuatro resultados potenciales]{.alert}, surgen estimandos clave:
+  - $Y_{01} - Y_{00}$: [Efecto directo]{.alert} del tratamiento cuando el compañero de casa no es tratado
+  - $Y_{11} - Y_{10}$: [Efecto del tratamiento]{.alert} cuando el compañero de casa recibe correo
+  - $Y_{10} - Y_{00}$: [Efecto de derrame]{.alert} en no tratados con compañero de casa tratado
+  - $Y_{11} - Y_{01}$: [Interacción de derrame]{.alert} entre pares tratados
+
+- Consideraciones críticas:
+  - Los efectos dependen del [estado de tratamiento del compañero de casa]{.alert}
+  - Los estimandos capturan [influencias combinadas]{.alert} de:
+    - Impactos directos de la intervención
+    - Derrames por comunicación
+    - Efectos de recursos compartidos
+  - No aísla [mecanismos]{.alert} específicos detrás de los derrames
+:::
+
+## Desafíos de implementación
+### Consideraciones prácticas
+
+::: {style="margin-top: 20px; font-size: 24px;"}
+::: {.columns}
+::: {.column width="50%"}
+- Obstáculos comunes de implementación:
+  - [Contaminación del tratamiento]{.alert} entre grupos
+  - [Deserción diferencial]{.alert} entre condiciones
+  - Complejidades del [monitoreo del cumplimiento]{.alert}
+  - [Asignación de recursos]{.alert} para seguimiento multinivel
+
+- Consideraciones éticas:
+  - [Consentimiento informado]{.alert} para miembros de la red
+  - [Protección de la privacidad]{.alert} para datos del hogar
+  - [Implicaciones de equidad]{.alert} de los efectos de derrame
+:::
+
+::: {.column width="50%"}
+- Limitaciones de diseño a abordar:
+  - [Requisitos de tamaño de muestra]{.alert} para efectos de clúster
+  - [Desafíos de medición]{.alert} para impactos indirectos
+  - [Aspectos temporales]{.alert} del momento del derrame
+  - [Estimación correcta de errores estándar]{.alert}, ya que los sujetos probablemente están correlacionados de muchas maneras
+
+```{=html}
+<div class="alert">
+<strong>Nota:</strong> El pre-registro es crucial para diseños complejos
+</div>
+```
+:::
+:::
+:::
 
 # Efecto Hawthorne 👀📸 {background-color="#2d4563"}
 
@@ -290,4 +670,3 @@ editor:
 - Recuerde diseñar su estudio y sus encuesta para tratar todos los brazos de tratamiento por igual, excepto por el tratamiento en sí.
 
 # {background-image="./images/preguntas.jpg"}
-   
