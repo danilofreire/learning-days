@@ -18,7 +18,7 @@ editor:
   render-on-save: true
 ---
 
-## Puntos clave de esta presentación
+## Puntos clave de esta presentación 
 
 :::{style="margin-top: 30px;"}
 :::
@@ -650,9 +650,9 @@ Fuente: [Collazos et al. (2021)](https://link.springer.com/article/10.1007/s1129
 
 - Encuestadores/investigadores deberían desconocer la condición de tratamiento de los sujetos.
 
-- No debemos hacer mediciones adicionales para el grupo de tratamiento.
+- No debemos hacer mediciones adicionales para el grupo de tratamiento. 
 
-# No excluibilidad {background-color="#2d4563"}
+# No excluibilidad {background-color="#2d4563"} 
 
 ## Diferencias entre los grupos de tratamiento y control más allá del tratamiento
 
